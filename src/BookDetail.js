@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 
+import PropTypes from 'prop-types';
+
 class BookDetail extends Component {
+	
+
+		static propTypes = {
+			book: PropTypes.object.isRequired,
+		}
+
 	render() {
+
 		const { imageLinks, title, authors } = this.props.book;
 
 		return (
@@ -31,7 +40,7 @@ class BookDetail extends Component {
 				</div>
 				<div className="book-title">{title}</div>
 				<div className="book-authors">
-					{authors.map(author => author + " ")}
+					{authors}
 				</div>
 			</div>
 		);
