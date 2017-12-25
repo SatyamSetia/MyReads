@@ -4,15 +4,20 @@ import * as BooksAPI from "./BooksAPI";
 
 class BookShelf extends Component {
 	state = {
-		books: []
+		books: [],
+		loading: true
 	};
 
 	componentDidMount() {
 		BooksAPI.getAll().then(books =>
 			this.setState({
 				books: books.filter(book => book.shelf === this.props.shelf)
-			})
+			},() => this.setState({loading: false}))
 		);
+	}
+
+	loader() {
+		return <div>Loading...</div>;
 	}
 
 	render() {
@@ -22,7 +27,7 @@ class BookShelf extends Component {
 				<h2 className="bookshelf-title">{this.props.title}</h2>
 				<div className="bookshelf-books">
 					<ol className="books-grid">
-						{this.state.books.map(book => {
+						{this.state.loading?this.loader():this.state.books.map(book => {
 							return (
 								<li key={book.id}>
 									<BookDetail book={book} />

@@ -12,11 +12,11 @@ class BookSearch extends Component {
 	};
 
 	handleInput = query => {
-		this.setState({loading: true});
+		this.setState({ loading: true });
 		this.setState({ query }, () => {
 			if (this.state.query) {
 				BooksAPI.search(this.state.query).then(books =>
-					this.setState({ books:books, loading: false })
+					this.setState({ books: books, loading: false })
 				);
 			} else {
 				this.setState({ books: [], loading: false });
@@ -26,25 +26,33 @@ class BookSearch extends Component {
 
 	displayBooks() {
 		if (!this.state.query) {
-			return <div>No books to show!!</div>;
+			return <div className="books-grid">No books to show!!</div>;
 		}
 
-		if(!this.state.books.error) {
-			return this.state.books.map(book => {
-				return (
-					<li key={book.id}>
-						<BookDetail book={book} />
-					</li>
-				);
-			});	
+		if (!this.state.books.error) {
+			return (
+				<div>
+					<div className="books-grid">
+						Showing {this.state.books.length} books for '{this.state.query}'
+					</div>
+					<ol className="books-grid">
+						{this.state.books.map(book => {
+							return (
+								<li key={book.id}>
+									<BookDetail book={book} />
+								</li>
+							);
+						})}
+					</ol>
+				</div>
+			);
 		}
 
-		return <div>No books to show!!</div>
-		
+		return <div className="books-grid">No books to show!!</div>;
 	}
 
 	loader() {
-		return <div>Loading...</div>;
+		return <div className="books-grid">Loading...</div>;
 	}
 
 	render() {
@@ -65,7 +73,11 @@ class BookSearch extends Component {
 					</div>
 				</div>
 				<div className="search-books-results">
-					<ol className="books-grid">{this.state.loading?this.loader():this.displayBooks()}</ol>
+					<div>
+						{this.state.loading
+							? this.loader()
+							: this.displayBooks()}
+					</div>
 				</div>
 			</div>
 		);
