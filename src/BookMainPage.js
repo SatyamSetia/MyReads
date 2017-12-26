@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import BookShelf from "./BookShelf";
 
 class BookMainPage extends Component {
+
+
 	render() {
 		return (
 			<div className="list-books">
@@ -11,7 +13,6 @@ class BookMainPage extends Component {
 				</div>
 				<div className="list-books-content">
 					<div>
-						{/*Continue Reading here*/}
 						<BookShelf title="Currently Reading" shelf="currentlyReading" />
 						<BookShelf title="Want to Read" shelf="wantToRead" />
 						<BookShelf title="Read" shelf="read" />

@@ -20,14 +20,17 @@ class BookShelf extends Component {
 		return <div>Loading...</div>;
 	}
 
-	render() {
+	emptyShelf() {
+		return <div>Shelf is empty.</div>
+	}
 
+	render() {
 		return (
 			<div className="bookshelf">
 				<h2 className="bookshelf-title">{this.props.title}</h2>
 				<div className="bookshelf-books">
 					<ol className="books-grid">
-						{this.state.loading?this.loader():this.state.books.map(book => {
+						{this.state.loading?this.loader():this.state.books.length===0?this.emptyShelf():this.state.books.map(book => {
 							return (
 								<li key={book.id}>
 									<BookDetail book={book} />

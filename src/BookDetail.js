@@ -1,17 +1,26 @@
 import React, { Component } from "react";
-
-import PropTypes from 'prop-types';
+import * as BooksAPI from "./BooksAPI";
+import PropTypes from "prop-types";
 
 class BookDetail extends Component {
-	
+	static propTypes = {
+		book: PropTypes.object.isRequired
+	};
 
-		static propTypes = {
-			book: PropTypes.object.isRequired,
-		}
+	handleSelect = e => {
+		BooksAPI.update(this.props.book,e.target.value).then(() => {});
+	}
+
 
 	render() {
-
 		const { imageLinks, title, authors } = this.props.book;
+		let imageURL;
+		if(!imageLinks){
+			imageURL = 'http://via.placeholder.com/130?text=No+Image';
+		} else {
+			imageURL = imageLinks.smallThumbnail;
+		}
+
 
 		return (
 			<div className="book">
@@ -21,11 +30,11 @@ class BookDetail extends Component {
 						style={{
 							width: 128,
 							height: 193,
-							backgroundImage: `url("${imageLinks.smallThumbnail}")`
+							backgroundImage: `url("${imageURL}")`
 						}}
 					/>
 					<div className="book-shelf-changer">
-						<select>
+						<select value={this.props.book.shelf} onChange={this.handleSelect}>
 							<option value="none" disabled>
 								Move to...
 							</option>
@@ -39,9 +48,7 @@ class BookDetail extends Component {
 					</div>
 				</div>
 				<div className="book-title">{title}</div>
-				<div className="book-authors">
-					{authors}
-				</div>
+				<div className="book-authors">{authors}</div>
 			</div>
 		);
 	}

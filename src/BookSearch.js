@@ -30,6 +30,7 @@ class BookSearch extends Component {
 		}
 
 		if (!this.state.books.error) {
+			console.log(this.state.books)
 			return (
 				<div>
 					<div className="books-grid">
