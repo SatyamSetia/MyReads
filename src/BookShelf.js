@@ -38,10 +38,10 @@ class BookShelf extends Component {
 			});
 	}
 
-	shouldComponentUpdate(nextProps,nextState) {
-		console.log(this.state.books !== nextState.books)
-        return this.state.books !== nextState.books;
-    }
+	// shouldComponentUpdate(nextProps,nextState) {
+	// 	console.log(this.state.books !== nextState.books)
+ //        return this.state.books !== nextState.books;
+ //    }
 
 	loader() {
 		return <div>Loading...</div>;
