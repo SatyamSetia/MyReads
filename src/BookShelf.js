@@ -9,8 +9,22 @@ class BookShelf extends Component {
 	};
 
 	componentDidMount() {
-		setInterval(() => {
-			this.setState(() => {
+		// setInterval(() => {
+		// 	this.setState(() => {
+		// 		BooksAPI.getAll().then(books =>
+		// 			this.setState(
+		// 				{
+		// 					books: books.filter(
+		// 						book => book.shelf === this.props.shelf
+		// 					)
+		// 				},
+		// 				() => this.setState({ loading: false })
+		// 			)
+		// 		);
+		// 	});
+		// }, 1000);
+
+		this.setState(() => {
 				BooksAPI.getAll().then(books =>
 					this.setState(
 						{
@@ -22,7 +36,6 @@ class BookShelf extends Component {
 					)
 				);
 			});
-		}, 1000);
 	}
 
 	shouldComponentUpdate(nextProps,nextState) {
