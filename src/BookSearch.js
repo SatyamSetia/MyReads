@@ -2,9 +2,17 @@ import React, { Component } from "react";
 import BookDetail from "./BookDetail";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
-//import escapeRegExp from 'escape-string-regexp';
+import PropTypes from "prop-types";
 
 class BookSearch extends Component {
+
+	static propTypes = {
+		title: PropTypes.string.isRequired,
+		updateShelf: PropTypes.func.isRequired,
+		books: PropTypes.array.isRequired,
+		loading: PropTypes.bool.isRequired
+	};
+
 	state = {
 		query: "",
 		loading: false,
@@ -24,13 +32,18 @@ class BookSearch extends Component {
 		});
 	};
 
+	updateShelf(book, shelf) {
+		BooksAPI.update(book, shelf).then(() => {
+			console.log("shelf updated");
+		});
+	}
+
 	displayBooks() {
 		if (!this.state.query) {
 			return <div className="books-grid">No books to show!!</div>;
 		}
 
 		if (!this.state.books.error) {
-			console.log(this.state.books)
 			return (
 				<div>
 					<div className="books-grid">
@@ -40,7 +53,12 @@ class BookSearch extends Component {
 						{this.state.books.map(book => {
 							return (
 								<li key={book.id}>
-									<BookDetail book={book} />
+									<BookDetail
+										book={book}
+										updateShelf={(book, shelf) => {
+											this.updateShelf(book, shelf);
+										}}
+									/>
 								</li>
 							);
 						})}

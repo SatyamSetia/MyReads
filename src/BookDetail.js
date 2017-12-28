@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import * as BooksAPI from "./BooksAPI";
 import PropTypes from "prop-types";
 
 class BookDetail extends Component {
+	
 	static propTypes = {
-		book: PropTypes.object.isRequired
+		book: PropTypes.object.isRequired,
+		updateShelf: PropTypes.func.isRequired
 	};
 
 	handleSelect = e => {
-		BooksAPI.update(this.props.book,e.target.value).then(() => {});
+		this.props.updateShelf(this.props.book,e.target.value);
 	}
 
 
