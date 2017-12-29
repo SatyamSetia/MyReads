@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import BookDetail from "./BookDetail";
+import PropTypes from "prop-types";
 
 class BookShelf extends Component {
+
+	static propTypes = {
+		title: PropTypes.string.isRequired,
+		updateShelf: PropTypes.func.isRequired,
+		books: PropTypes.array.isRequired,
+		loading: PropTypes.bool.isRequired
+	};
+
 	emptyShelf() {
 		return <div>Shelf is empty.</div>;
 	}

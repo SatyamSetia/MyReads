@@ -1,19 +1,20 @@
 # MyReads Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+This project is completed as a part of React fundamentals course in React Nanodegree from Udacity. It is providing book keeping service in three different categories of bookshelf namely Currently Reading, Want to read and Read. Search functionality will let you search any book by it's title or author's name (Find available search terms in [SEARCH_TERMS.md](SEARCH_TERMS.md)).
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+[Demo](https://myreadsapp.herokuapp.com/) of MyReads.
 
 ## TL;DR
 
-To get started developing right away:
+To launch this project on your machine:
 
+* clone this repository.
 * install all project dependencies with `npm install`
+* install some other packages with `npm install --save react-router-dom prop-types`
 * start the development server with `npm start`
 
 ## What You're Getting
 ```bash
-├── CONTRIBUTING.md
 ├── README.md - This file.
 ├── SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
 ├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
@@ -21,10 +22,14 @@ To get started developing right away:
 │   ├── favicon.ico # React Icon, You may change if you wish.
 │   └── index.html # DO NOT MODIFY
 └── src
-    ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app. Contains static HTML right now.
+    ├── App.css # Styles for app.
+    ├── App.js # This is the root of app.
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
+    ├── BookDetail.js # Component for rendering each instance of Book.
+    ├── BookMainPage.js # Component for main page of the app with three shelves and button for search page on it.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    ├── BookSearch.js # Component for search page with input bar on top with a back arrow button to return on BookMainPage
+    ├── BookShelf.js # Component for rendering each shelf.
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
     │   ├── arrow-back.svg
@@ -33,7 +38,18 @@ To get started developing right away:
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+## Project Structure
+```bash
+index.js is the root file which is importing App.js to render App component. This App component has two child components namely BookMainPage and BookSearch available on '/' and '/search' routes respectively. BookMainPage is the home page of MyReads App which has a child component BookShelf. This BookShelf component is required for each shelf on home page. Both BookSearch and BookMainPage components has a common child component which is BookDetail. This component is rendering each single book on both home page and search page.
+    index.js
+    |
+    App.js
+    |
+    ├── BookMainPage.js
+    |   └────────────── BookSearch.js
+    └── BookSearch.js   |
+        └────────────── BookDetail.js 
+```
 
 ## Backend Server
 
@@ -84,9 +100,3 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -2,16 +2,8 @@ import React, { Component } from "react";
 import BookDetail from "./BookDetail";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 class BookSearch extends Component {
-
-	static propTypes = {
-		title: PropTypes.string.isRequired,
-		updateShelf: PropTypes.func.isRequired,
-		books: PropTypes.array.isRequired,
-		loading: PropTypes.bool.isRequired
-	};
 
 	state = {
 		query: "",

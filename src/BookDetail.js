@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class BookDetail extends Component {
-	
+
 	static propTypes = {
 		book: PropTypes.object.isRequired,
 		updateShelf: PropTypes.func.isRequired
@@ -12,9 +12,8 @@ class BookDetail extends Component {
 		this.props.updateShelf(this.props.book,e.target.value);
 	}
 
-
 	render() {
-		const { imageLinks, title, authors } = this.props.book;
+		const { imageLinks, title, authors, shelf } = this.props.book;
 		let imageURL;
 		if(!imageLinks){
 			imageURL = 'http://via.placeholder.com/130?text=No+Image';
@@ -35,7 +34,7 @@ class BookDetail extends Component {
 						}}
 					/>
 					<div className="book-shelf-changer">
-						<select value={this.props.book.shelf} onChange={this.handleSelect}>
+						<select value={shelf} onChange={this.handleSelect}>
 							<option value="none" disabled>
 								Move to...
 							</option>
