@@ -10,7 +10,7 @@ To launch this project on your machine:
 
 * clone this repository.
 * install all project dependencies with `npm install`
-* install some other packages with `npm install --save react-router-dom prop-types`
+* install some other packages with `npm install --save react-router-dom prop-types react-throttle react-if`
 * start the development server with `npm start`
 
 ## What You're Getting
