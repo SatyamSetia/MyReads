@@ -53,15 +53,3 @@ class BookShelf extends Component {
 }
 
 export default BookShelf;
-
-// {this.state.loading
-// 							? this.loader()
-// 							: this.state.books.length === 0
-// 								? this.emptyShelf()
-// 								: this.state.books.map(book => {
-// 										return (
-// 											<li key={book.id}>
-// 												<BookDetail book={book} updateShelf={(book, shelf) => this.props.updateShelf(book,shelf)}/>
-// 											</li>
-// 										);
-// 									})}

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import BookDetail from "./BookDetail";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
+import { Debounce } from 'react-throttle';
 
 class BookSearch extends Component {
-
 	state = {
 		query: "",
 		loading: false,
@@ -12,8 +12,7 @@ class BookSearch extends Component {
 	};
 
 	handleInput = query => {
-		this.setState({ loading: true });
-		this.setState({ query }, () => {
+		this.setState({ books: [], loading: true, query: query }, () => {
 			if (this.state.query) {
 				BooksAPI.search(this.state.query).then(books =>
 					this.setState({ books: books, loading: false })
@@ -74,13 +73,14 @@ class BookSearch extends Component {
 						Close
 					</Link>
 					<div className="search-books-input-wrapper">
-						<input
-							type="text"
-							value={this.state.query}
-							onChange={event =>
-								this.handleInput(event.target.value)}
-							placeholder="Search by title or author"
-						/>
+						<Debounce time="300" handler="onChange" >
+							<input
+								type="text"
+								onChange={(event) =>
+									this.handleInput(event.target.value)}
+								placeholder="Search by title or author"
+							/>
+						</Debounce>
 					</div>
 				</div>
 				<div className="search-books-results">

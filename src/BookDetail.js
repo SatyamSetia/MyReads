@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import * as BooksAPI from "./BooksAPI";
 import PropTypes from "prop-types";
 
 class BookDetail extends Component {
+	state = {
+		shelf: "none"
+	};
 
 	static propTypes = {
 		book: PropTypes.object.isRequired,
@@ -9,21 +13,28 @@ class BookDetail extends Component {
 	};
 
 	handleSelect = e => {
-		this.props.updateShelf(this.props.book,e.target.value);
+		this.props.updateShelf(this.props.book, e.target.value);
+	};
+
+	componentDidMount() {
+		BooksAPI.get(this.props.book.id).then(book =>
+			this.setState({ shelf: book.shelf }, () => {
+				console.log("shelf detected");
+			})
+		);
 	}
 
 	render() {
-		const { imageLinks, title, authors, shelf } = this.props.book;
+		const { imageLinks, title, authors } = this.props.book;
 		let imageURL;
-		if(!imageLinks){
-			imageURL = 'http://via.placeholder.com/130?text=No+Image';
+		if (!imageLinks) {
+			imageURL = "http://via.placeholder.com/130?text=No+Image";
 		} else {
 			imageURL = imageLinks.smallThumbnail;
 		}
 
-
 		return (
-			<div className="book">
+			<div className="book" ref="book">
 				<div className="book-top">
 					<div
 						className="book-cover"
@@ -34,8 +45,11 @@ class BookDetail extends Component {
 						}}
 					/>
 					<div className="book-shelf-changer">
-						<select value={shelf} onChange={this.handleSelect}>
-							<option value="none" disabled>
+						<select
+							value={this.state.shelf}
+							onChange={this.handleSelect}
+						>
+							<option value="no" disabled>
 								Move to...
 							</option>
 							<option value="currentlyReading">
