@@ -3,6 +3,7 @@ import BookDetail from "./BookDetail";
 import * as BooksAPI from "./BooksAPI";
 import { Link } from "react-router-dom";
 import { Debounce } from 'react-throttle';
+import { If, Then, Else } from 'react-if';
 
 class BookSearch extends Component {
 	state = {
@@ -85,9 +86,10 @@ class BookSearch extends Component {
 				</div>
 				<div className="search-books-results">
 					<div>
-						{this.state.loading
-							? this.loader()
-							: this.displayBooks()}
+						<If condition={this.state.loading===true}>
+							<Then>{this.loader()}</Then>
+							<Else>{this.displayBooks()}</Else>
+						</If>
 					</div>
 				</div>
 			</div>
